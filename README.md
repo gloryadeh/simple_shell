@@ -1,1 +1,1 @@
-This is a readme file
+ALX low level programming simple shell in C.
