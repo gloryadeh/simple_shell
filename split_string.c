@@ -10,6 +10,7 @@ void split_string(char *string, char *delim, char ***array)
 {
 	/*char *token;*/
 	int buffsize = 1024, i = 0;
+	char *token;
 
 	/* allocate malloc and get first word */
 	*(*array + i) = malloc(sizeof(char *) * buffsize);
@@ -18,9 +19,13 @@ void split_string(char *string, char *delim, char ***array)
 		perror("Error: ");
 		exit(99);
 	}
-	*(*array + i) = strtok(string, delim);
+	printf("About to ...");
+	token = strtok(string, delim);
+	printf("About to copy string");
+
+	_strcpy(*(*array + i), token);
 	/* check if strtok failed */
-	if (*(*array + i) == NULL)
+	if (token == NULL)
 	{
 		free(*(*array + i));
 		return;
@@ -37,13 +42,13 @@ void split_string(char *string, char *delim, char ***array)
 			exit(99);
 		}
 
-		*(*array + i) = strtok(NULL, delim);
+		token = strtok(NULL, delim);
 		/* check if strtok failed */
-		if (*(*array + i) == NULL)
+		if (token == NULL)
 		{
-			free(*(*array + i));
-			return;
+			break;
 		}
-	} while (*(*array + i) != NULL);
+		_strcpy(*(*array + i), token);
+	} while (token != NULL);
 	*(*array + i) = '\0';
 }

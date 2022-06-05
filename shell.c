@@ -29,6 +29,7 @@ int main(void)
 
 	do {
 		/* split the string and get the length of words */
+		printf("About to call split_string");
 		split_string(buffer, " ", &av);
 		len = len_av(av);
 		/* print strings */
