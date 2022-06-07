@@ -17,6 +17,5 @@ int print_string(char *string)
 		_putchar(string[len]);
 		len++;
 	}
-	_putchar(':');
 	return (len);
 }

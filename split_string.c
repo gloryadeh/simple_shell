@@ -26,7 +26,7 @@ char **split_string(char *string, char *delim)
 		perror("Error: ");
 		exit(EXIT_FAILURE);
 	}
-	/* break the string int tokens */
+	/* break the string into tokens */
 	token = strtok(string, delim);
 	while (token != NULL)
 	{

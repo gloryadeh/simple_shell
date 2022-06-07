@@ -39,14 +39,14 @@ int main(void)
 			print_string(av[i]);
 			if (stat(av[i], &st) == 0)
 	        {
-	            printf(" FOUND\n");
+	            print_string(": FOUND\n");
 	        }
 	        else
 	        {
-	            printf(" NOT FOUND\n");
+	            print_string(": NOT FOUND\n");
 	        }
-			if (i != len - 1)
-				print_string(" ");
+			/*if (i != len - 1)*/
+				/*print_string(" ");*/
 		}
 
 		/* execute command */

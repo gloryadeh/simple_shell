@@ -13,10 +13,7 @@ void execute(char **args)
 	{
 		/* we are in the child process */
 		if (execve(args[0], args, NULL) == -1)
-		{
-			perror("Error");
 			exit(EXIT_FAILURE);
-		}
 	}
 	else if (child_pid > 0)
 	{
@@ -27,7 +24,6 @@ void execute(char **args)
 	else
 	{
 		/* if execve returns */
-		perror("Error: ");
 		exit(EXIT_FAILURE);
 	}
 }
