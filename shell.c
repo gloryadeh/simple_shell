@@ -12,15 +12,23 @@ int main(void)
 	ssize_t characters;
 	int i, len = 0;
 
-	/* allocate space for string */
-	buffer = malloc(sizeof(char) * buffsize);
-	if (buffer == NULL)
+	while (characters != EOF)
 	{
-		perror("Error: ");
-		exit(EXIT_FAILURE);
-	}
+		/* print "$ " */
+		_putchar('$');
+		_putchar(' ');
 
-	do {
+		/* allocate space for string */
+		buffer = malloc(sizeof(char) * buffsize);
+		if (buffer == NULL)
+		{
+			perror("Error: ");
+			exit(EXIT_FAILURE);
+		}
+
+		/* get characters */
+		characters = getline(&buffer, &buffsize, stdin);
+
 		/* split string into av */
 		av = split_string(buffer, " ");
 		len = len_av(av);
@@ -32,17 +40,13 @@ int main(void)
 				print_string(" ");
 		}
 
-		/* print "$ " */
-		_putchar('$');
-		_putchar(' ');
-	} while ((characters = getline(&buffer, &buffsize, stdin)) >= 0);
+		/* free array */
+		for (i = 0; i <= len; i++)
+			free(av[i]);
+		free(av);
+		free(buffer);
+	}
 
 	_putchar('\n');
-
-	/* free array */
-	for (i = 0; i <= len; i++)
-		free(av[i]);
-	free(av);
-	free(buffer);
 	return (0);
 }
