@@ -6,49 +6,86 @@
  * @delim: delimeter
  * @array: malloc'ed array of strings
  */
-void split_string(char *string, char *delim, char ***array)
+void **split_string(char *string, char *delim)
 {
-	/*char *token;*/
-	int buffsize = 1024, i = 0;
+	/* declare variables 8*/
+	char **args;
 	char *token;
+	unsigned int length = 0, capacity = 16;
 
-	/* allocate malloc and get first word */
-	*(*array + i) = malloc(sizeof(char *) * buffsize);
-	if (!*(*array + i))
+	/* check if string is NULL, print error and exit */
+	if (string == NULL)
 	{
-		perror("Error: ");
-		exit(99);
+		fprintf(stderr, "Error\n");
+		exit(EXIT_FAILURE);
 	}
-	printf("About to ...");
+	/* allocate memory for args - where tokens will be stored */
+	args = malloc(sizeof(char *) * capacity);
+	if (args == NULL)
+	{
+		perror("Error:");
+		exit(EXIT_FAILURE);
+	}
+	/* break the string int tokens */
 	token = strtok(string, delim);
-	printf("About to copy string");
-
-	_strcpy(*(*array + i), token);
-	/* check if strtok failed */
-	if (token == NULL)
+	while (token != NULL)
 	{
-		free(*(*array + i));
-		return;
-	}
-
-	do {
-		i++;
-
-		/* allocate malloc and get next word */
-		*(*array + i) = malloc(sizeof(char *) * buffsize);
-		if (!*(*array + i))
+		args[length] = token; /* store tokens */
+		length++;
+		/* reallocate memory if length is greater than capacity */
+		/* we'll have to write a function for realloc because we're not allowed to use it*/
+		if (length >= capacity)
 		{
-			perror("Error: ");
-			exit(99);
+			capacity = (int) (capacity * 1.5);
+			args = realloc(args, capacity * sizeof(char*));
 		}
-
+		/* continue strtok */
 		token = strtok(NULL, delim);
-		/* check if strtok failed */
-		if (token == NULL)
-		{
-			break;
-		}
-		_strcpy(*(*array + i), token);
-	} while (token != NULL);
-	*(*array + i) = '\0';
+	}
+	/* make last char in args NULL */
+	args[length] = NULL;
+	return (args);
+	// /*char *token;*/
+	// int buffsize = 1024, i = 0;
+	// char *token;
+	//
+	// /* allocate malloc and get first word */
+	// *(*array + i) = malloc(sizeof(char *) * buffsize);
+	// if (!*(*array + i))
+	// {
+	// 	perror("Error: ");
+	// 	exit(99);
+	// }
+	// printf("About to ...");
+	// token = strtok(string, delim);
+	// printf("About to copy string");
+	//
+	// _strcpy(*(*array + i), token);
+	// /* check if strtok failed */
+	// if (token == NULL)
+	// {
+	// 	free(*(*array + i));
+	// 	return;
+	// }
+	//
+	// do {
+	// 	i++;
+	//
+	// 	/* allocate malloc and get next word */
+	// 	*(*array + i) = malloc(sizeof(char *) * buffsize);
+	// 	if (!*(*array + i))
+	// 	{
+	// 		perror("Error: ");
+	// 		exit(99);
+	// 	}
+	//
+	// 	token = strtok(NULL, delim);
+	// 	/* check if strtok failed */
+	// 	if (token == NULL)
+	// 	{
+	// 		break;
+	// 	}
+	// 	_strcpy(*(*array + i), token);
+	// } while (token != NULL);
+	// *(*array + i) = '\0';
 }
