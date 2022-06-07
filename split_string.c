@@ -38,9 +38,9 @@ char **split_string(char *string, char *delim)
 			exit(EXIT_FAILURE);
 		}
 		_strcpy(args[length], token); /* store tokens */
+		token = strtok(NULL, delim);
 		length++;
 		/* continue strtok */
-		token = strtok(NULL, delim);
 	}
 	/* make last char in args NULL */
 	args[length] = NULL;
