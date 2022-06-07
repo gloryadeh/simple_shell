@@ -40,6 +40,9 @@ int main(void)
 				print_string(" ");
 		}
 
+		/* execute command */
+		execute(av);
+
 		/* free array */
 		for (i = 0; i <= len; i++)
 			free(av[i]);
