@@ -10,27 +10,19 @@ int main(void)
 	char *buffer, **av;
 	size_t buffsize = 32;
 	ssize_t characters;
-	int i, len;
+	int i, len = 0;
 
 	/* allocate space for string */
-	buffer = malloc(sizeof(char *) * buffsize);
-	if (!buffer)
+	buffer = malloc(sizeof(char) * buffsize);
+	if (buffer == NULL)
 	{
 		perror("Error: ");
-		exit(98);
-	}
-	/* allocate spcae for av */
-	av = malloc(sizeof(char **) * 1024);
-	if (!av)
-	{
-		perror("Error: ");
-		exit(98);
+		exit(EXIT_FAILURE);
 	}
 
 	do {
-		/* split the string and get the length of words */
-		printf("About to call split_string");
-		split_string(buffer, " ", &av);
+		/* split string into av */
+		av = split_string(buffer, " ");
 		len = len_av(av);
 		/* print strings */
 		for (i = 0; av[i] && len > 0; i++)
@@ -47,14 +39,10 @@ int main(void)
 
 	_putchar('\n');
 
-	printf("Got here\n");
-	for (i = len; i >= 0; i--)
-	{
-		printf("av[%d] = %s\n", i, av[i]);
+	/* free array */
+	for (i = 0; i <= len; i++)
 		free(av[i]);
-		printf("freed\n");
-	}
 	free(av);
-	/*free(buffer);*/
+	free(buffer);
 	return (0);
 }

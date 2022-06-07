@@ -9,7 +9,7 @@
 int _putchar(char c);
 int print_string(char *string);
 int len_av(char **av);
-void split_string(char *string, char *delim, char ***array);
+char **split_string(char *string, char *delim);
 char *_strcpy(char *dest, char *src);
 
 #endif /* SHEL_L */
