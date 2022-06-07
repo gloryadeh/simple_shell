@@ -12,10 +12,11 @@ void execute(char **args)
 	if (child_pid == 0)
 	{
 		/* we are in the child process */
-		execve(args[0], args, NULL);
-		/* if execve returns */
-		perror("execve error: ");
-		exit(EXIT_FAILURE);
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror("Error");
+			exit(EXIT_FAILURE);
+		}
 	}
 	else if (child_pid > 0)
 	{

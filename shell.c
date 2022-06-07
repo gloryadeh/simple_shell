@@ -11,6 +11,7 @@ int main(void)
 	size_t buffsize = 32;
 	ssize_t characters;
 	int i, len = 0;
+	struct stat st;
 
 	while (characters != EOF)
 	{
@@ -36,6 +37,14 @@ int main(void)
 		for (i = 0; av[i] && len > 0; i++)
 		{
 			print_string(av[i]);
+			if (stat(av[i], &st) == 0)
+	        {
+	            printf(" FOUND\n");
+	        }
+	        else
+	        {
+	            printf(" NOT FOUND\n");
+	        }
 			if (i != len - 1)
 				print_string(" ");
 		}
