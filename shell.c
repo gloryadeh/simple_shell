@@ -10,7 +10,7 @@ int main(void)
 	char *buffer, **av;
 	size_t buffsize = 32;
 	ssize_t characters;
-	int i, len = 0;
+	int i, j, len = 0;
 	struct stat st;
 
 	while (characters != EOF)
@@ -29,6 +29,15 @@ int main(void)
 
 		/* get characters */
 		characters = getline(&buffer, &buffsize, stdin);
+		/* remove trailing new line */
+		for (i = 0; buffer[i]; i++)
+		{
+			if (buffer[i] == '\n')
+			{
+				for (j = i; buffer[j]; j++)
+					buffer[j] = buffer[j + 1];
+			}
+		}
 
 		/* split string into av */
 		av = split_string(buffer, " ");
