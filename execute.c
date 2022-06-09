@@ -2,24 +2,36 @@
 
 /**
  * execute - creates a child process and executes a command
- * @args: array of argument strings
+ * @av: array of argument strings
  */
-void execute(char **args)
+void execute(char **av)
 {
-	int status;
+	int status, builtin_stat;
 	struct stat st;
 	pid_t child_pid;
+	built_in builtin[] = {
+		{"exit", exit_prog},
+		{"env", print_env},
+		{NULL, NULL}
+	};
 
 	/* check if the command exists */
-	if (stat(args[0], &st) == 0)
+	if (stat(av[0], &st) == 0)
 		child_pid = fork();
+	else if (stat(av[0], &st) == -1)
+	{
+		builtin_stat = run_builtin(builtin, av[0]);
+		if (builtin_stat != 0)
+			return;
+	}
 	else
 		return;
 
+	/* check if we are in parent or child process */
 	if (child_pid == 0)
 	{
 		/* we are in the child process */
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(av[0], av, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
 	else if (child_pid > 0)
