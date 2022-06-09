@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+extern char **environ;
 /**
  * struct builtin - struct of av[0] keywords and related functions
  * @argument: av[0]
