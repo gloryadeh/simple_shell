@@ -26,8 +26,14 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 
-		/* get characters and remove trailing new line */
+		/* get characters and check for EOF */
 		characters = getline(&buffer, &buffsize, stdin);
+		if (characters == EOF)
+		{
+			free(buffer);
+			break;
+		}
+		/* remove trailing new line */
 		rem_line(&buffer);
 		/* split string into av and get the length of av */
 		av = split_string(buffer, " ");
