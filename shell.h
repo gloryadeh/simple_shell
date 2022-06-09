@@ -16,5 +16,6 @@ int len_av(char **av);
 char **split_string(char *string, char *delim);
 char *_strcpy(char *dest, char *src);
 void execute(char **args);
+void rem_line(char **buffer);
 
 #endif /* SHEL_L */

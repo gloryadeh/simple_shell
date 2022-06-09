@@ -10,8 +10,7 @@ int main(void)
 	char *buffer, **av;
 	size_t buffsize = 32;
 	ssize_t characters;
-	int i, j, len = 0;
-	struct stat st;
+	int i, len = 0;
 
 	while (characters != EOF)
 	{
@@ -27,36 +26,12 @@ int main(void)
 			exit(EXIT_FAILURE);
 		}
 
-		/* get characters */
+		/* get characters and remove trailing new line */
 		characters = getline(&buffer, &buffsize, stdin);
-		/* remove trailing new line */
-		for (i = 0; buffer[i]; i++)
-		{
-			if (buffer[i] == '\n')
-			{
-				for (j = i; buffer[j]; j++)
-					buffer[j] = buffer[j + 1];
-			}
-		}
-
-		/* split string into av */
+		rem_line(&buffer);
+		/* split string into av and get the length of av */
 		av = split_string(buffer, " ");
 		len = len_av(av);
-		/* print strings */
-		for (i = 0; av[i] && len > 0; i++)
-		{
-			print_string(av[i]);
-			if (stat(av[i], &st) == 0)
-	        {
-	            print_string(": FOUND\n");
-	        }
-	        else
-	        {
-	            print_string(": NOT FOUND\n");
-	        }
-			/*if (i != len - 1)*/
-				/*print_string(" ");*/
-		}
 
 		/* execute command */
 		execute(av);
@@ -67,7 +42,6 @@ int main(void)
 		free(av);
 		free(buffer);
 	}
-
 	_putchar('\n');
 	return (0);
 }

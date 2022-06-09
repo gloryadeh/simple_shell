@@ -7,7 +7,14 @@
 void execute(char **args)
 {
 	int status;
-	pid_t child_pid = fork();
+	struct stat st;
+	pid_t child_pid;
+
+	/* check if the command exists */
+	if (stat(args[0], &st) == 0)
+		child_pid = fork();
+	else
+		return;
 
 	if (child_pid == 0)
 	{
@@ -23,7 +30,7 @@ void execute(char **args)
 	}
 	else
 	{
-		/* if execve returns */
+		/* if execve returns*/
 		exit(EXIT_FAILURE);
 	}
 }
