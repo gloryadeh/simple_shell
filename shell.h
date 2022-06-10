@@ -33,5 +33,6 @@ void exit_prog(void);
 int _strcmp(char *s1, char *s2);
 int run_builtin(built_in builtin[], char *argument);
 void print_env(void);
+void rename_ls(char ***args);
 
 #endif /* SHEL_L */

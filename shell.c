@@ -17,7 +17,6 @@ int main(void)
 		/* print "$ " */
 		_putchar('$');
 		_putchar(' ');
-
 		/* allocate space for string */
 		buffer = malloc(sizeof(char) * buffsize);
 		if (buffer == NULL)
@@ -25,7 +24,6 @@ int main(void)
 			perror("Error: ");
 			exit(EXIT_FAILURE);
 		}
-
 		/* get characters and check for EOF */
 		characters = getline(&buffer, &buffsize, stdin);
 		if (characters == EOF)
@@ -38,10 +36,8 @@ int main(void)
 		/* split string into av and get the length of av */
 		av = split_string(buffer, " ");
 		len = len_av(av);
-
 		/* execute command */
 		execute(av);
-
 		/* free array */
 		for (i = 0; i <= len; i++)
 			free(av[i]);

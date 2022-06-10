@@ -15,6 +15,9 @@ void execute(char **av)
 		{NULL, NULL}
 	};
 
+	/* check for ls and change to /bin/ls */
+	if (_strcmp(av[0], "ls") == 0)
+		rename_ls(&av);
 	/* check if the command exists */
 	if (stat(av[0], &st) == 0)
 		child_pid = fork();
@@ -24,8 +27,6 @@ void execute(char **av)
 		if (builtin_stat != 0)
 			return;
 	}
-	else
-		return;
 
 	/* check if we are in parent or child process */
 	if (child_pid == 0)
@@ -40,9 +41,7 @@ void execute(char **av)
 		/* child process is still running so we are waiting for it */
 		wait(&status);
 	}
+	/* if command doesn't exist*/
 	else
-	{
-		/* if execve returns*/
-		exit(EXIT_FAILURE);
-	}
+		return;
 }
