@@ -3,8 +3,9 @@
 /**
  * execute - creates a child process and executes a command
  * @av: array of argument strings
+ * @argv: argument variables
  */
-void execute(char **av)
+void execute(char **av, char **argv)
 {
 	int status, builtin_stat;
 	struct stat st;
@@ -14,7 +15,6 @@ void execute(char **av)
 		{"env", print_env},
 		{NULL, NULL}
 	};
-
 	/* check for ls and change to /bin/ls */
 	if (_strcmp(av[0], "ls") == 0)
 		rename_ls(&av);
@@ -25,9 +25,13 @@ void execute(char **av)
 	{
 		builtin_stat = run_builtin(builtin, av[0]);
 		if (builtin_stat != 0)
-			return;
+		{
+			write(2, argv[0], _strlen(argv[0])), write(2, ": ", 2);
+			write(2, "1: ", 3), write(2, av[0], _strlen(av[0]));
+			write(2, ": not found\n", 12);
+			exit(EXIT_FAILURE);
+		}
 	}
-
 	/* check if we are in parent or child process */
 	if (child_pid == 0)
 	{
@@ -41,7 +45,6 @@ void execute(char **av)
 		/* child process is still running so we are waiting for it */
 		wait(&status);
 	}
-	/* if command doesn't exist*/
 	else
 		return;
 }

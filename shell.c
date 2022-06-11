@@ -3,8 +3,10 @@
 /**
  * main - simple shell
  * Return: 0 on success
+ * @argc: argument count
+ * @argv: argument variables
  */
-int main(void)
+int main(int argc, char **argv)
 {
 	/* declare variables */
 	char *buffer, **av;
@@ -12,6 +14,8 @@ int main(void)
 	ssize_t characters;
 	int i, len = 0;
 
+	if (argc <= 0)
+		return (0);
 	while (characters != EOF)
 	{
 		/* print "$ " */
@@ -31,13 +35,11 @@ int main(void)
 			free(buffer);
 			break;
 		}
-		/* remove trailing new line */
-		rem_line(&buffer);
+		rem_line(&buffer);	/* remove trailing new line */
 		/* split string into av and get the length of av */
 		av = split_string(buffer, " ");
 		len = len_av(av);
-		/* execute command */
-		execute(av);
+		execute(av, argv);	/* execute command */
 		/* free array */
 		for (i = 0; i <= len; i++)
 			free(av[i]);
