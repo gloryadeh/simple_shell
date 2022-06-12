@@ -19,9 +19,14 @@ extern char **environ;
 typedef struct builtin
 {
 	char *argument;
-	void (*function)(void);
+	void (*function)(char ***);
 } built_in;
 
+/* builtin functons */
+void print_env(char ***args);
+void exit_prog(char ***args);
+
+/* utility functions */
 int _putchar(char c);
 int print_string(char *string);
 int len_av(char **av);
@@ -29,11 +34,10 @@ char **split_string(char *string, char *delim);
 char *_strcpy(char *dest, char *src);
 void execute(char **args, char **argv);
 void rem_line(char **buffer);
-void exit_prog(void);
 int _strcmp(char *s1, char *s2);
-int run_builtin(built_in builtin[], char *argument);
-void print_env(void);
+int run_builtin(built_in builtin[], char ***args);
 void rename_ls(char ***args);
 int _strlen(char *s);
+int _atoi(char *s);
 
 #endif /* SHEL_L */

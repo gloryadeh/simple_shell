@@ -6,7 +6,7 @@
  * @argc: argument count
  * @argv: argument variables
  */
-int main(int argc, char **argv)
+int main(__attribute__ ((unused)) int argc, char **argv)
 {
 	/* declare variables */
 	char *buffer, **av;
@@ -14,18 +14,14 @@ int main(int argc, char **argv)
 	ssize_t characters;
 	int i, len = 0;
 
-	if (argc <= 0)
-		return (0);
 	while (characters != EOF)
 	{
-		/* print "$ " */
-		_putchar('$');
-		_putchar(' ');
+		write(1, "$ ", 2); /* print '$ ' */
 		/* allocate space for string */
 		buffer = malloc(sizeof(char) * buffsize);
 		if (buffer == NULL)
 		{
-			perror("Error: ");
+			perror("Error");
 			exit(EXIT_FAILURE);
 		}
 		/* get characters and check for EOF */
@@ -36,12 +32,10 @@ int main(int argc, char **argv)
 			break;
 		}
 		rem_line(&buffer);	/* remove trailing new line */
-		/* split string into av and get the length of av */
-		av = split_string(buffer, " ");
-		len = len_av(av);
+		av = split_string(buffer, " "); /* split string into av */
+		len = len_av(av); /* get length of av */
 		execute(av, argv);	/* execute command */
-		/* free array */
-		for (i = 0; i <= len; i++)
+		for (i = 0; i <= len; i++) /* free array */
 			free(av[i]);
 		free(av);
 		free(buffer);

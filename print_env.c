@@ -2,8 +2,9 @@
 
 /**
  * print_env - print the environment variables
+ * @args: pointer to argument variables
  */
-void print_env(void)
+void print_env(__attribute__ ((unused)) char ***args)
 {
 	int i;
 

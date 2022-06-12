@@ -15,15 +15,15 @@ void execute(char **av, char **argv)
 		{"env", print_env},
 		{NULL, NULL}
 	};
-	/* check for ls and change to /bin/ls */
-	if (_strcmp(av[0], "ls") == 0)
-		rename_ls(&av);
-	/* check if the command exists */
-	if (stat(av[0], &st) == 0)
-		child_pid = fork();
-	else if (stat(av[0], &st) == -1)
+
+	if (_strcmp(av[0], "ls") == 0) /* check for ls */
+		rename_ls(&av); /* rename ls to /bin/ls */
+
+	if (stat(av[0], &st) == 0) /* check if the command exists */
+		child_pid = fork(); /* create child process */
+	else if (stat(av[0], &st) == -1) /* if command doesn't exist */
 	{
-		builtin_stat = run_builtin(builtin, av[0]);
+		builtin_stat = run_builtin(builtin, &av);
 		if (builtin_stat != 0)
 		{
 			write(2, argv[0], _strlen(argv[0])), write(2, ": ", 2);

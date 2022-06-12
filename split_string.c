@@ -16,14 +16,14 @@ char **split_string(char *string, char *delim)
 	/* check if string is NULL, print error and exit */
 	if (string == NULL)
 	{
-		perror("Error: ");
+		perror("Error");
 		exit(EXIT_FAILURE);
 	}
 	/* allocate memory for args - where tokens will be stored */
 	args = malloc(sizeof(char *) * capacity);
 	if (args == NULL)
 	{
-		perror("Error: ");
+		perror("Error");
 		exit(EXIT_FAILURE);
 	}
 	/* break the string into tokens */
@@ -34,7 +34,7 @@ char **split_string(char *string, char *delim)
 		args[length] = malloc(sizeof(char) * 1024);
 		if (args[length] == NULL)
 		{
-			perror("Error: ");
+			perror("Error");
 			exit(EXIT_FAILURE);
 		}
 		_strcpy(args[length], token); /* store tokens */
