@@ -28,6 +28,8 @@ typedef struct builtin
 /* builtin functons */
 void print_env(char ***args);
 void exit_prog(char ***args);
+void _setenv(char ***args);
+void _unsetenv(char ***args);
 
 /* utility functions */
 int _putchar(char c);
@@ -43,7 +45,7 @@ void rename_ls(char ***args);
 int _strlen(char *s);
 int _atoi(char *s);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-char *_getline(void);
+void _getline(char **buffer);
 int _getchar(void);
 char *_strtok(char *line, char *delim);
 unsigned int is_delim(char c, char *delim);

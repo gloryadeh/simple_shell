@@ -29,9 +29,8 @@ char *_strtok(char *line, char *delim)
 	char *ret;
 
 	if (line == NULL)
-		line = backup_string;
-	if (line == NULL)
 	{
+		line = backup_string;
 		perror("Invalid input\n");
 		exit(EXIT_FAILURE);
 	}

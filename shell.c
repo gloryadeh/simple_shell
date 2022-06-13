@@ -24,7 +24,7 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 		/* get characters and check for EOF */
-		buffer = _getline();
+		_getline(&buffer);
 		if (buffer[0] == EOF)
 		{
 			free(buffer);

@@ -13,6 +13,8 @@ void execute(char **av, char **argv)
 	built_in builtin[] = {
 		{"exit", exit_prog},
 		{"env", print_env},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
 		{NULL, NULL}
 	};
 

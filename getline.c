@@ -27,21 +27,14 @@ int _getchar(void)
 
 /**
  * _getline - reads a line from stdin
- *
- * Return: pointer to the line
+ * @buffer: pointer to malloc'ed string
  */
-char *_getline(void)
+void _getline(char **buffer)
 {
-	char *line;
+	char *line = *buffer;
 	int c, index, bufsize;
 
 	bufsize = BUF_SIZE;
-	line = malloc(sizeof(char) * BUF_SIZE);
-	if (line == NULL)
-	{
-		perror("Failed to allocate memory\n");
-		return (NULL);
-	}
 	index = 0;
 	while (1)
 	{
@@ -49,12 +42,12 @@ char *_getline(void)
 		if (c == EOF)
 		{
 			line[index] = EOF;
-			return (line);
+			return;
 		}
 		else if (c == '\n')
 		{
 			line[index] = '\0';
-			return (line);
+			return;
 		}
 		else
 			line[index] = c;
