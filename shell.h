@@ -2,6 +2,7 @@
 #define SHEL_L
 #define MAX 1024
 #define BUF_SIZE 200
+#define ARG_SIZE 10
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -42,7 +43,9 @@ void rename_ls(char ***args);
 int _strlen(char *s);
 int _atoi(char *s);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-void gtline(char **lineptr, size_t *n, char *buffer, size_t j);
-ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+char *_getline(void);
+int _getchar(void);
+char *_strtok(char *line, char *delim);
+unsigned int is_delim(char c, char *delim);
 
 #endif /* SHEL_L */

@@ -27,7 +27,7 @@ char **split_string(char *string, char *delim)
 		exit(EXIT_FAILURE);
 	}
 	/* break the string into tokens */
-	token = strtok(string, delim);
+	token = _strtok(string, delim);
 	while (token != NULL)
 	{
 		/* allocate spcae for each string */
@@ -38,7 +38,7 @@ char **split_string(char *string, char *delim)
 			exit(EXIT_FAILURE);
 		}
 		_strcpy(args[length], token); /* store tokens */
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 		length++;
 		/* continue strtok */
 	}

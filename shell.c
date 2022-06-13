@@ -11,10 +11,9 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 	/* declare variables */
 	char *buffer, **av;
 	size_t buffsize = 32;
-	ssize_t characters;
 	int i, len = 0;
 
-	while (characters != EOF)
+	while (1)
 	{
 		write(1, "$ ", 2); /* print '$ ' */
 		/* allocate space for string */
@@ -25,8 +24,8 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 			exit(EXIT_FAILURE);
 		}
 		/* get characters and check for EOF */
-		characters = getline(&buffer, &buffsize, stdin);
-		if (characters == EOF)
+		buffer = _getline();
+		if (buffer[0] == EOF)
 		{
 			free(buffer);
 			break;
