@@ -10,13 +10,6 @@ void execute(char **av, char **argv)
 	int status, builtin_stat;
 	struct stat st;
 	pid_t child_pid;
-	built_in builtin[] = {
-		{"exit", exit_prog},
-		{"env", print_env},
-		{"setenv", _setenv},
-		{"unsetenv", _unsetenv},
-		{NULL, NULL}
-	};
 
 	if (_strcmp(av[0], "ls") == 0) /* check for ls */
 		rename_ls(&av); /* rename ls to /bin/ls */
@@ -25,7 +18,7 @@ void execute(char **av, char **argv)
 		child_pid = fork(); /* create child process */
 	else if (stat(av[0], &st) == -1) /* if command doesn't exist */
 	{
-		builtin_stat = run_builtin(builtin, &av);
+		builtin_stat = run_builtin(&av);
 		if (builtin_stat != 0)
 		{
 			write(2, argv[0], _strlen(argv[0])), write(2, ": ", 2);

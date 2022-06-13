@@ -26,6 +26,7 @@ typedef struct builtin
 } built_in;
 
 /* builtin functons */
+int run_builtin(char ***args);
 void print_env(char ***args);
 void exit_prog(char ***args);
 void _setenv(char ***args);
@@ -40,7 +41,6 @@ char *_strcpy(char *dest, char *src);
 void execute(char **args, char **argv);
 void rem_line(char **buffer);
 int _strcmp(char *s1, char *s2);
-int run_builtin(built_in builtin[], char ***args);
 void rename_ls(char ***args);
 int _strlen(char *s);
 int _atoi(char *s);

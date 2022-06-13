@@ -2,14 +2,20 @@
 
 /**
  * run_builtin - checks for and runs builtin functions
- * @builtin: array of builtin functions
  * @args: av
  * Return: 0 on success
  */
-int run_builtin(built_in builtin[], char ***args)
+int run_builtin(char ***args)
 {
 	int i = 0;
 	char **arguments = *args;
+	built_in builtin[] = {
+		{"exit", exit_prog},
+		{"env", print_env},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{NULL, NULL}
+	};
 
 	/* iterate through builtin struct to check builtin functions */
 	for (i = 0; builtin[i].argument != NULL; i++)
