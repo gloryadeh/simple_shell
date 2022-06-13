@@ -37,14 +37,12 @@ void execute(char **av, char **argv)
 	/* check if we are in parent or child process */
 	if (child_pid == 0)
 	{
-		/* we are in the child process */
-		if (execve(av[0], av, NULL) == -1)
+		if (execve(av[0], av, NULL) == -1) /* we are in the child process */
 			exit(EXIT_FAILURE);
 	}
 	else if (child_pid > 0)
 	{
-		/* we are in parent process, */
-		/* child process is still running so we are waiting for it */
+		/* parent process, child process is running, we are waiting for it */
 		wait(&status);
 	}
 	else

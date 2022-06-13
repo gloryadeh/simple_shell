@@ -22,7 +22,7 @@ void print_env(__attribute__ ((unused)) char ***args)
 void _setenv(char ***args)
 {
 	char **av = *args;
-	char *error1 = "Incomplete arguments to setenv\nsyntax: setenv VARIABLE VALUE\n";
+	char *error1 = "Error:\n\tsyntax: setenv VARIABLE VALUE\n";
 	char *error2 = "Unable to set environment variable";
 	int ret;
 
@@ -32,7 +32,8 @@ void _setenv(char ***args)
 		return;
 	}
 
-	if ((ret = setenv(av[1], av[2], 1) != 0))
+	ret = setenv(av[1], av[2], 1);
+	if (ret != 0)
 	{
 		write(2, error2, _strlen(error2));
 		return;
@@ -46,7 +47,7 @@ void _setenv(char ***args)
 void _unsetenv(char ***args)
 {
 	char **av = *args;
-	char *error1 = "Incomplete arguments to unsetenv\nsyntax: unsetenv VARIABLE\n";
+	char *error1 = "Error:\n\tsyntax: unsetenv VARIABLE\n";
 	char *error2 = "Unable to unset environment variable";
 	int ret;
 
@@ -56,7 +57,8 @@ void _unsetenv(char ***args)
 		return;
 	}
 
-	if ((ret = unsetenv(av[1]) != 0))
+	ret = unsetenv(av[1]);
+	if (ret != 0)
 	{
 		write(2, error2, _strlen(error2));
 		return;
