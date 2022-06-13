@@ -46,3 +46,54 @@ char **split_string(char *string, char *delim)
 	args[length] = NULL;
 	return (args);
 }
+
+/**
+ * _strcmp - compares 2 strings
+ * @s1: string 1
+ * @s2: string 2
+ * Return: s1 - s2
+ */
+int _strcmp(char *s1, char *s2)
+{
+	int i, j, k, l, result;
+
+	/* get length of s1 */
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		i++;
+	}
+
+	for (j = 0; j < i; j++)
+	{
+		result = 0;
+
+		if (s1[j] != s2[j])
+		{
+			k = s1[j];
+			l = s2[j];
+			result = k - l;
+
+			break;
+		}
+	}
+	return (result);
+}
+
+/**
+* *_strcpy - copies the string pointed
+*@dest: copie of the string
+*@src: origin of the string
+*Return: dest destine copie
+*/
+char *_strcpy(char *dest, char *src)
+{
+	int i;
+
+	for (i = 0; src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+	}
+	dest[i] = '\0';
+	return (dest);
+}
