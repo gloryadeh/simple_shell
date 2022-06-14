@@ -10,7 +10,7 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 {
 	/* declare variables */
 	char *buffer, **av;
-	size_t buffsize = 32;
+	size_t buffsize = 1024;
 	int i, len = 0;
 
 	while (1)

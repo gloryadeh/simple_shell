@@ -14,6 +14,8 @@ int run_builtin(char ***args)
 		{"env", print_env},
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},
+		{"cd", change_dir},
+		{"pwd", print_cwd},
 		{NULL, NULL}
 	};
 

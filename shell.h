@@ -14,6 +14,7 @@
 #include <stdbool.h>
 
 extern char **environ;
+
 /**
  * struct builtin - struct of av[0] keywords and related functions
  * @argument: av[0]
@@ -31,6 +32,8 @@ void print_env(char ***args);
 void exit_prog(char ***args);
 void _setenv(char ***args);
 void _unsetenv(char ***args);
+void change_dir(char ***args);
+void print_cwd(char ***args);
 
 /* utility functions */
 int _putchar(char c);
@@ -49,5 +52,7 @@ void _getline(char **buffer);
 int _getchar(void);
 char *_strtok(char *line, char *delim);
 unsigned int is_delim(char c, char *delim);
+void home_dir(char **home);
+void _getcwd(char **cwd);
 
 #endif /* SHEL_L */
