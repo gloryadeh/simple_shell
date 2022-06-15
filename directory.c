@@ -95,7 +95,7 @@ void change_dir(char ***args)
 			exit(EXIT_FAILURE);
 		home_dir(&home); /* get home directory */
 		ret = chdir(home); /* change directory */
-		setenv("PWD", home, 1);
+		_setenv("PWD", home, 1);
 		if (ret != 0)
 		{
 			write(2, error1, _strlen(error1));
@@ -106,7 +106,7 @@ void change_dir(char ***args)
 	} else if (av[1][0] == '-' && av[1][1] == '\0') /* cd - */
 	{
 		/*ret = chdir(cwd);
-		setenv("PWD", cwd, 1);
+		_setenv("PWD", cwd, 1);
 		if (ret != 0)
 		{
 			write(2, error1, _strlen(error1));
@@ -115,7 +115,7 @@ void change_dir(char ***args)
 	} else
 	{
 		ret = chdir(av[1]);
-		setenv("PWD", av[1], 1);
+		_setenv("PWD", av[1], 1);
 		if (ret != 0)
 		{
 			write(2, error1, _strlen(error1));

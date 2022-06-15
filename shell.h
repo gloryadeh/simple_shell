@@ -30,8 +30,8 @@ typedef struct builtin
 int run_builtin(char ***args);
 void print_env(char ***args);
 void exit_prog(char ***args);
-void _setenv(char ***args);
-void _unsetenv(char ***args);
+void _callsetenv(char ***args);
+void _callunsetenv(char ***args);
 void change_dir(char ***args);
 void print_cwd(char ***args);
 
@@ -54,5 +54,8 @@ char *_strtok(char *line, char *delim);
 unsigned int is_delim(char c, char *delim);
 void home_dir(char **home);
 void _getcwd(char **cwd);
+int check_name(char *envname);
+void writeenv(char **new_environ, char *envname, char *envval);
+int _setenv(char *envname, char *envval, int overwrite);
 
 #endif /* SHEL_L */

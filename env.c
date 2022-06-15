@@ -16,10 +16,10 @@ void print_env(__attribute__ ((unused)) char ***args)
 }
 
 /**
- * _setenv - calls setenv function
+ * _callsetenv - calls setenv function
  * @args: pointer to arguments
  */
-void _setenv(char ***args)
+void _callsetenv(char ***args)
 {
 	char **av = *args;
 	char *error1 = "Error:\n\tsyntax: setenv VARIABLE VALUE\n";
@@ -32,7 +32,7 @@ void _setenv(char ***args)
 		return;
 	}
 
-	ret = setenv(av[1], av[2], 1);
+	ret = _setenv(av[1], av[2], 1);
 	if (ret != 0)
 	{
 		write(2, error2, _strlen(error2));
@@ -41,10 +41,10 @@ void _setenv(char ***args)
 }
 
 /**
- * _unsetenv - calls unsetenv
+ * _callunsetenv - calls unsetenv
  * @args: pointer to arguments
  */
-void _unsetenv(char ***args)
+void _callunsetenv(char ***args)
 {
 	char **av = *args;
 	char *error1 = "Error:\n\tsyntax: unsetenv VARIABLE\n";

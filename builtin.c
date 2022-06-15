@@ -12,8 +12,8 @@ int run_builtin(char ***args)
 	built_in builtin[] = {
 		{"exit", exit_prog},
 		{"env", print_env},
-		{"setenv", _setenv},
-		{"unsetenv", _unsetenv},
+		{"setenv", _callsetenv},
+		{"unsetenv", _callunsetenv},
 		{"cd", change_dir},
 		{"pwd", print_cwd},
 		{NULL, NULL}
