@@ -63,7 +63,7 @@ int _setenv(char *envname, char *envval, int overwrite)
 	new_environ[i] = malloc(sizeof(char) * 1024);
 	if (new_environ[i] == NULL)
 		exit(EXIT_FAILURE);
-	writeenv(&new_environ[i], envname, envval) /* add new variable */
+	writeenv(&new_environ[i], envname, envval); /* add new variable */
 	i++, new_environ[i] = '\0';
 	environ = new_environ;
 	free(var_name);
@@ -97,7 +97,7 @@ void writeenv(char **new_environ, char *envname, char *envval)
 }
 
 /**
- * check_name - chcck env name for =
+ * check_name - check env name for =
  * @envname: env name
  * Return: 0 if it doesn't have, else -1
  */
@@ -110,6 +110,45 @@ int check_name(char *envname)
 		if (envname[i] == '=')
 			return (-1);
 		i++;
+	}
+	return (0);
+}
+
+/**
+ * _setenv - setenv function
+ * @envname: environment name
+ * Return: 0 on success, else -1
+ */
+int _unsetenv(char *envname)
+{
+	int i, j, k = 0, ret;
+	char *var_name;
+
+	ret = check_name(envname); /* check name for '=' */
+	if (ret == -1)
+		return (-1);
+	var_name = malloc(sizeof(char) * 100);
+	if (var_name == NULL)
+		exit(EXIT_FAILURE);
+
+	for (i = 0; environ[i]; i++) /* check if variable exists */
+	{
+		j = 0, k = 0;
+		while (environ[i][j] != '=') /* read variable name */
+		{
+			var_name[k] = environ[i][j];
+			k++, j++;
+		}
+		var_name[k] = '\0';
+		if (_strcmp(var_name, envname) == 0) /* if environment var exists */
+		{
+			while (environ[i])
+			{
+				environ[i] = environ[i + 1];
+				i++;
+			}
+			return (0);
+		}
 	}
 	return (0);
 }

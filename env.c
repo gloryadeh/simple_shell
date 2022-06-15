@@ -57,7 +57,7 @@ void _callunsetenv(char ***args)
 		return;
 	}
 
-	ret = unsetenv(av[1]);
+	ret = _unsetenv(av[1]);
 	if (ret != 0)
 	{
 		write(2, error2, _strlen(error2));

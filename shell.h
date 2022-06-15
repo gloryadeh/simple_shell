@@ -57,5 +57,6 @@ void _getcwd(char **cwd);
 int check_name(char *envname);
 void writeenv(char **new_environ, char *envname, char *envval);
 int _setenv(char *envname, char *envval, int overwrite);
+int _unsetenv(char *envname);
 
 #endif /* SHEL_L */
