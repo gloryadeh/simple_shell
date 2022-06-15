@@ -35,8 +35,7 @@ int _setenv(char *envname, char *envval, int overwrite)
 				return (0);
 			}
 		}
-	}
-	/* variable doesn't exist */
+	} /* variable doesn't exist */
 	len = len_av(environ); /* get length of environ */
 	new_environ = malloc(sizeof(char *) * (len + 2));
 	if (new_environ == NULL)
@@ -46,6 +45,9 @@ int _setenv(char *envname, char *envval, int overwrite)
 	i++, new_environ[i] = '\0';
 	environ = new_environ;
 	free(var_name);
+	for (i = 0; new_environ[i]; i++)
+		free(new_environ[i]);
+	free(new_environ);
 	return (0);
 }
 

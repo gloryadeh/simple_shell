@@ -1,7 +1,7 @@
 #ifndef SHEL_L
 #define SHEL_L
 #define MAX 1024
-#define BUF_SIZE 200
+#define BUF_SIZE 512
 #define ARG_SIZE 10
 
 #include <sys/types.h>

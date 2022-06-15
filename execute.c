@@ -9,7 +9,7 @@ void execute(char **av, char **argv)
 {
 	int status, builtin_stat;
 	struct stat st;
-	pid_t child_pid;
+	pid_t child_pid = -1;
 
 	if (_strcmp(av[0], "ls") == 0) /* check for ls */
 		rename_ls(&av); /* rename ls to /bin/ls */
