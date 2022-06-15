@@ -87,9 +87,19 @@ void change_dir(char ***args)
 	int ret;
 	char *error1 = "Error: Unable to change directory\n";
 	char *home;
+	static char *OLDWD;
+
+	if (OLDWD == NULL) /* if OLDWD is uninitialized */
+	{
+		OLDWD = malloc(sizeof(char) * 1024);
+		if (OLDWD == NULL)
+			exit(EXIT_FAILURE);
+		_getcwd(&OLDWD);
+	}
 
 	if (!av[1]) /* cd $HOME */
 	{
+		_getcwd(&OLDWD);
 		home = malloc(sizeof(char) * BUF_SIZE);
 		if (home == NULL)
 			exit(EXIT_FAILURE);
@@ -105,15 +115,16 @@ void change_dir(char ***args)
 		free(home);
 	} else if (av[1][0] == '-' && av[1][1] == '\0') /* cd - */
 	{
-		/*ret = chdir(cwd);
-		_setenv("PWD", cwd, 1);
+		ret = chdir(OLDWD);
+		_setenv("PWD", OLDWD, 1);
 		if (ret != 0)
 		{
 			write(2, error1, _strlen(error1));
 			return;
-		}*/
+		}
 	} else
 	{
+		_getcwd(&OLDWD);
 		ret = chdir(av[1]);
 		_setenv("PWD", av[1], 1);
 		if (ret != 0)
