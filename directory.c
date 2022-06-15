@@ -83,10 +83,9 @@ void print_cwd(__attribute__ ((unused)) char ***args)
  */
 void change_dir(char ***args)
 {
-	char **av = *args;
+	char **av = *args, *home;
 	int ret;
 	char *error1 = "Error: Unable to change directory\n";
-	char *home;
 	static char *OLDWD;
 
 	if (OLDWD == NULL) /* if OLDWD is uninitialized */

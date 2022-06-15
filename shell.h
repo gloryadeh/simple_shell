@@ -58,5 +58,7 @@ int check_name(char *envname);
 void writeenv(char **new_environ, char *envname, char *envval);
 int _setenv(char *envname, char *envval, int overwrite);
 int _unsetenv(char *envname);
+int read_var_name(int i, char **var_name);
+int copyenv(char ***environm);
 
 #endif /* SHEL_L */
