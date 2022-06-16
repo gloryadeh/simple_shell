@@ -15,7 +15,9 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 
 	while (1)
 	{
-		/* if (isatty(0)) write(1, "$ ", 2); */
+		if (isatty(0))
+			write(1, "$ ", 2); /* print '$ ' */
+		/* allocate space for string */
 		buffer = malloc(sizeof(char) * buffsize);
 		if (buffer == NULL)
 		{
