@@ -31,7 +31,7 @@ int _setenv(char *envname, char *envval, int overwrite)
 					environ[i][j] = envval[k];
 					j++, k++;
 				}
-				environ[i][j] = '\0';
+				environ[i][j] = '\0', free(var_name);
 				return (0);
 			}
 		}
@@ -87,5 +87,6 @@ int _unsetenv(char *envname)
 			return (0);
 		}
 	}
+	free(var_name);
 	return (0);
 }

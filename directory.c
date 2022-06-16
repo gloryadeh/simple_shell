@@ -83,10 +83,9 @@ void print_cwd(__attribute__ ((unused)) char ***args)
  */
 void change_dir(char ***args)
 {
-	char **av = *args;
+	char **av = *args, *home;
 	int ret;
 	char *error1 = "Error: Unable to change directory\n";
-	char *home;
 	static char *OLDWD;
 
 	if (OLDWD == NULL) /* if OLDWD is uninitialized */
@@ -96,41 +95,32 @@ void change_dir(char ***args)
 			exit(EXIT_FAILURE);
 		_getcwd(&OLDWD);
 	}
-
 	if (!av[1]) /* cd $HOME */
 	{
 		_getcwd(&OLDWD);
 		home = malloc(sizeof(char) * BUF_SIZE);
 		if (home == NULL)
-			exit(EXIT_FAILURE);
-		home_dir(&home); /* get home directory */
-		ret = chdir(home); /* change directory */
+			exit(EXIT_FAILURE); /* get & change home directory */
+		home_dir(&home), ret = chdir(home);
 		_setenv("PWD", home, 1);
 		if (ret != 0)
-		{
 			write(2, error1, _strlen(error1));
-			free(home);
-			return;
-		}
 		free(home);
 	} else if (av[1][0] == '-' && av[1][1] == '\0') /* cd - */
 	{
-		ret = chdir(OLDWD);
-		_setenv("PWD", OLDWD, 1);
+		ret = chdir(OLDWD), _setenv("PWD", OLDWD, 1);
 		if (ret != 0)
-		{
 			write(2, error1, _strlen(error1));
-			return;
-		}
 	} else
 	{
-		_getcwd(&OLDWD);
-		ret = chdir(av[1]);
-		_setenv("PWD", av[1], 1);
-		if (ret != 0)
+		if (_strcmp(av[1], "exit") == 0)
 		{
-			write(2, error1, _strlen(error1));
+			free(OLDWD);
 			return;
 		}
+		_getcwd(&OLDWD), ret = chdir(av[1]);
+		_setenv("PWD", av[1], 1);
+		if (ret != 0)
+			write(2, error1, _strlen(error1));
 	}
 }

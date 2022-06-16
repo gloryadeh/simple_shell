@@ -33,12 +33,12 @@ int main(__attribute__ ((unused)) int argc, char **argv)
 		}
 		rem_line(&buffer);	/* remove trailing new line */
 		av = split_string(buffer, " "); /* split string into av */
+		free(buffer);
 		len = len_av(av); /* get length of av */
 		execute(av, argv);	/* execute command */
 		for (i = 0; i <= len; i++) /* free array */
 			free(av[i]);
 		free(av);
-		free(buffer);
 	}
 	return (0);
 }
