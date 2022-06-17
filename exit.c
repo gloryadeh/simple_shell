@@ -43,6 +43,13 @@ void exit_prog(char ***args)
 
 	if (arguments[1]) /* if exit is given an argument */
 	{
+		if (arguments[1][0] == '-')/* check negative number */
+		{
+			write(2, "./hsh", 5);
+			write(2, ": 1: exit: Illegal number: ", 27);
+			write(2, arguments[1], _strlen(arguments[1])), write(2, "\n", 1);
+			return;
+		}
 		number = _atoi(arguments[1]); /* convert it to an integer */
 
 		for (i = 0; arguments[i]; i++) /* free arguments */
