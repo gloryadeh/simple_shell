@@ -48,7 +48,7 @@ void exit_prog(char ***args)
 			write(2, "./hsh", 5);
 			write(2, ": 1: exit: Illegal number: ", 27);
 			write(2, arguments[1], _strlen(arguments[1])), write(2, "\n", 1);
-			return;
+			exit(2);
 		}
 		number = _atoi(arguments[1]); /* convert it to an integer */
 
