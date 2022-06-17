@@ -43,7 +43,7 @@ void exit_prog(char ***args)
 
 	if (arguments[1]) /* if exit is given an argument */
 	{
-		if (arguments[1][0] == '-')/* check negative number */
+		if (arguments[1][0] < 48 || arguments[1][0] > 57)/* check valid number */
 		{
 			write(2, "./hsh", 5);
 			write(2, ": 1: exit: Illegal number: ", 27);
